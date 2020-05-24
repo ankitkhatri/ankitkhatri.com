@@ -1,90 +1,69 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { rhythm, scale } from "../utils/typography"
+import { rhythm } from "../utils/typography"
 
-class BlogPostTemplate extends React.Component {
-  render() {
-    const post = this.props.data.mdx
-    const siteTitle = this.props.data.site.siteMetadata.title
-    const { previous, next } = this.props.pageContext
-
-    return (
-      <Layout location={this.props.location} title={siteTitle}>
+export default function Template({
+  data, // this prop will be injected by the GraphQL query below.
+}) {
+  const { site, markdownRemark } = data // data.markdownRemark holds your post data
+  const { siteMetadata } = site
+  const { frontmatter, html } = markdownRemark
+  return (
+    <Layout location={this.props.location} title={frontmatter.title || siteMetadata.title}>
         <SEO
-          title={post.frontmatter.title}
+          title={frontmatter.title || siteMetadata.title}
           description={post.frontmatter.description || post.excerpt}
         />
-        <h1>{post.frontmatter.title}</h1>
-        <p
-          style={{
-            ...scale(-1 / 5),
-            display: `block`,
-            marginBottom: rhythm(1),
-            marginTop: rhythm(-1),
-          }}
-        >
-          {post.frontmatter.date}
-        </p>
-        <MDXRenderer>{post.body}</MDXRenderer>
-        <hr
+      <div className="blog-post-container">
+        <article className="post">
+          
+          {!frontmatter.thumbnail && (
+            <div className="post-thumbnail">
+              <h1 className="post-title">{frontmatter.title}</h1>
+              <div className="post-meta">{frontmatter.date}</div>
+            </div>
+          )}
+          {!!frontmatter.thumbnail && (
+            <div className="post-thumbnail" style={{backgroundImage: `url(${frontmatter.thumbnail})`}}>
+              <h1 className="post-title">{frontmatter.title}</h1>
+              <div className="post-meta">{frontmatter.date}</div>
+            </div>
+          )}
+          <div
+            className="blog-post-content"
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        </article>
+      </div>
+      <hr
           style={{
             marginBottom: rhythm(1),
           }}
         />
         <Bio />
-
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
-          <li>
-            {previous && (
-              <Link to={`blog${previous.fields.slug}`} rel="prev">
-                ← {previous.frontmatter.title}
-              </Link>
-            )}
-          </li>
-          <li>
-            {next && (
-              <Link to={`blog${next.fields.slug}`} rel="next">
-                {next.frontmatter.title} →
-              </Link>
-            )}
-          </li>
-        </ul>
-      </Layout>
-    )
-  }
+    </Layout>
+  )
 }
 
-export default BlogPostTemplate
-
 export const pageQuery = graphql`
-  query BlogPostBySlug($slug: String!) {
+  query($path: String!) {
     site {
       siteMetadata {
         title
-        author
       }
     }
-    mdx(fields: { slug: { eq: $slug } }) {
-      id
-      excerpt(pruneLength: 160)
-      body
+    markdownRemark(frontmatter: { path: { eq: $path } }) {
+      html
       frontmatter {
-        title
         date(formatString: "MMMM DD, YYYY")
-        description
+        path
+        title
+        thumbnail
+        metaDescription
       }
     }
   }
