@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     // edit below
-    title: `Gatsby Starter Personal Blog`,
+    title: `Ankit's Personal Blog.`,
     author: `Ankit Khatri`,
     description: `Ankit's Personal Blog.`,
     siteUrl: `https://ankitkhatri.com/`,
