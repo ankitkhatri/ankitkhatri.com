@@ -28,12 +28,12 @@ exports.createPages = async ({ graphql, actions }) => {
   }
 
   result.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    if (node.frontmatter.path !== '/demo') {
+    // if (node.frontmatter.path !== '/demo') {
       createPage({
         path: node.frontmatter.path,
         component: blogPost,
         context: {}, // additional data can be passed via context
       })
-    }
+    // }
   })
 }

@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, graphql } from "gatsby"
+import { graphql } from "gatsby"
 
 import Bio from "../components/bio"
 import Layout from "../components/layout"
@@ -13,10 +13,10 @@ export default function Template({
   const { siteMetadata } = site
   const { frontmatter, html } = markdownRemark
   return (
-    <Layout location={this.props.location} title={frontmatter.title || siteMetadata.title}>
+    <Layout location={frontmatter.path} title={frontmatter.title || siteMetadata.title}>
         <SEO
           title={frontmatter.title || siteMetadata.title}
-          description={post.frontmatter.description || post.excerpt}
+          description={frontmatter.metaDescription || frontmatter.description}
         />
       <div className="blog-post-container">
         <article className="post">

@@ -22,7 +22,7 @@ const IndexPage = ({
           title="Home"
           keywords={[`Ankit Khatri`, `CodeMyMobile`]}
         />
-      <h2>Blog Posts &darr;</h2>
+      <h2>{site.siteMetadata.title}</h2>
       <div className="grids">
         {Posts}
       </div>
