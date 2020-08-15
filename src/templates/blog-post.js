@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import Image from "gatsby-image"
 import Bio from "../components/bio"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -20,19 +21,17 @@ export default function Template({
         />
       <div className="blog-post-container">
         <article className="post">
-          
-          {!frontmatter.thumbnail && (
-            <div className="post-thumbnail">
-              <h1 className="post-title">{frontmatter.title}</h1>
-              <div className="post-meta">{frontmatter.date}</div>
-            </div>
-          )}
           {!!frontmatter.thumbnail && (
-            <div className="post-thumbnail" style={{backgroundImage: `url(${frontmatter.thumbnail})`}}>
-              <h1 className="post-title">{frontmatter.title}</h1>
-              <div className="post-meta">{frontmatter.date}</div>
-            </div>
+            <img 
+              src={frontmatter.thumbnail}
+            />
           )}
+          <div className="post-thumbnail">
+            <h1 className="post-title">{frontmatter.title}</h1>
+            <div className="post-meta">{frontmatter.date}</div>
+          </div>
+          
+          
           <div
             className="blog-post-content"
             dangerouslySetInnerHTML={{ __html: html }}
