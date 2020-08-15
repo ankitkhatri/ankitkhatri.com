@@ -26,7 +26,7 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: `${__dirname}/content/assets`,
+        path: `${__dirname}/static/assets`,
         name: `assets`,
       },
     },
@@ -34,6 +34,9 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [{
+          resolve: 'gatsby-remark-relative-images'
+        },
+        {
           resolve: `gatsby-remark-prismjs`,
           options: {
             classPrefix: "language-",

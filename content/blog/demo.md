@@ -7,6 +7,7 @@ description: >-
   my attempt to eternally Thank you for coming in our lives, giving us an
   entirely new meaning of life and to share a few experiences as a father that
   will surely help you unfold yourself in this beautiful world!
+thumbnail: /assets/4ba48948-16a3-4e71-8f2d-74bc30812285.jpg
 ---
 My dearest Hridhaan, as your turn 0.5 today, on your dad’s birthday, here is my attempt to eternally Thank you for coming in our lives, giving us an entirely new meaning of life and to share a few experiences as a father that will surely help you unfold yourself in this beautiful world!
 
