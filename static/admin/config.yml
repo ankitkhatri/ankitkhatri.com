@@ -1,5 +1,6 @@
 backend:
-  name: test-repo
+  name: github
+  repo: ankitkhatri/ankitkhatri.com
 
 media_folder: static/assets
 public_folder: assets
